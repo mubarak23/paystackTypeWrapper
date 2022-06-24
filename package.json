@@ -1,0 +1,25 @@
+{
+  "name": "paystacktype",
+  "version": "1.0.0",
+  "description": "paystack typescript wrapper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "payment"
+  ],
+  "author": "Mubarak Muhammad Aminu",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^16.7.6",
+    "axios": "^0.27.2",
+    "dotenv": "^10.0.0",
+    "kuda-node": "^1.0.3",
+    "shortid": "^2.2.16",
+    "ts-node": "^10.2.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.4.2"
+  }
+}
