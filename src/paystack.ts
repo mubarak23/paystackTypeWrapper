@@ -4,6 +4,8 @@ import axios, { AxiosResponse } from "axios"
 import { IUser } from "../dto/IUser";
 import { IPaymentInitializeResponse } from "../dto/IPaymentInitializepresonse";
 import * as Util from "./helper"
+import { IPaymentInitializeRequest } from "../dto/IPaymentInitializeRequest";
+import { IAccountNameEnqury } from "../dto/IAccountNameEnqury";
 
 export const getBankLists = async (country: string): Promise<IPaystackBank[]> => {
     const baseUrl = process.env.PAYSTACK_BASE_URL + `/bank/?country=${country}`
@@ -25,7 +27,8 @@ export const getBankLists = async (country: string): Promise<IPaystackBank[]> =>
 
 } 
 
-export const accountNmeEnqury = async (bankCode: string, accountNumber: string): Promise<IPaystackResolveAccount> => {
+export const accountNmeInqury = async ( requestBody:IAccountNameEnqury): Promise<IPaystackResolveAccount> => {
+    const {bankCode, accountNumber} = requestBody
     const baseURL =  process.env.PAYSTACK_BASE_URL + `/bank/resolve?account_number=${accountNumber}&bank_code=${bankCode}`
   const headers = {
     Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
@@ -45,7 +48,8 @@ export const accountNmeEnqury = async (bankCode: string, accountNumber: string):
 }
 
 
-export const initializeTransaction = async (payingUser:IUser, amountMajor: number): Promise<IPaymentInitializeResponse> => {
+export const initializeTransaction = async (requestData: IPaymentInitializeRequest): Promise<IPaymentInitializeResponse> => {
+  const { payingUser, amountMajor} = requestData
     const base_url = process.env.PAYSTACK_BASE_URL + `/transaction/initialize`
     const headers = {
       Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
@@ -82,3 +86,5 @@ export const initializeTransaction = async (payingUser:IUser, amountMajor: numbe
       throw new Error('An error occurred with our payment provider. Please try again at a later time.')
     }
 }
+
+
